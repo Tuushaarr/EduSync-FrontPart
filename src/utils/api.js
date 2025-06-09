@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://localhost:7259';
+const API_BASE_URL = 'https://mytusharwebapp-crbxdcggaqdcehc8.centralindia-01.azurewebsites.net';
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
