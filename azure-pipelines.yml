@@ -2,21 +2,22 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
-  inputs:
-    versionSpec: '20.x'
   displayName: 'Install Node.js'
+  inputs:
+    versionSpec: '18.x'
 
 - script: |
     npm install
     npm run build
-  displayName: 'npm install and build'
+  displayName: 'Install dependencies and build'
 
-- task: PublishBuildArtifacts@1
+- task: AzureStaticWebApp@0
+  displayName: 'Deploy to Azure Static Web App'
   inputs:
-    PathtoPublish: 'build'
-    ArtifactName: 'frontend'
-    publishLocation: 'Container'
+    app_location: '/'           # Root of your app (change if your app is in a subfolder)
+    output_location: 'build'    # React's build output folder
+    azure_static_web_apps_api_token: $(deployment_token) # Set this as a secret variable in your pipeline
